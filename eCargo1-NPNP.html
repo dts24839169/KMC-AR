@@ -13,5 +13,18 @@
 <body>
 <model-viewer camera-controls auto-rotate  alt="A BELT SYSTEM BY DTS INC" src="eCargo1-NPNP.gltf" shadow-intensity="0">
 </model-viewer>
+   <label for="neutral">Neutral Lighting: </label>
+  <input id="neutral" type="checkbox" checked="true">
+</model-viewer>
+<script>
+(() => {
+  const modelViewer = document.querySelector('#neutral-demo');
+  const checkbox = document.querySelector('#neutral');
+  
+  checkbox.addEventListener('change',() => {
+    modelViewer.environmentImage = checkbox.checked ? 'neutral' : '';
+  });
+})();
+</script>
 </body>
 </html>
