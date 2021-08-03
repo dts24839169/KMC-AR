@@ -85,11 +85,16 @@ model-viewer[ar-status="session-started"] > #ar-prompt {
     margin-right: 10px;
     display: flex;
     border: 2px solid #b3b3b3; /*灰色*/
-    font-size: 30px;
+    font-size: 35px;
     font-family: Arial;
     justify-content: center;
     cursor: pointer;
 }
+
+.slides #tab1{
+    font-size: 20px;
+}
+
 /*按鈕觸發呈現藍色*/
 .slide.selected {
     border: 2px solid #4285f4;/*藍色*/
@@ -111,17 +116,19 @@ model-viewer[ar-status="session-started"] > #ar-prompt {
 
     <div id="KMCLOGO"><img src="KMC Logo.png"></div>
 
-    <model-viewer camera-controls id="exposure-demo" environment-image="neutral" exposure="1" src="Se500-NPNP.glb" shadow-intensity="0">
+    <model-viewer camera-controls id="exposure-demo" environment-image="neutral" src="Se500-Silver&Black.glb" shadow-intensity="0">
     </model-viewer>
 
     <!--按鈕目標和圖示-->
     <div class="slider"><!-- 滑桿 -->
         <div class="slides" id="tabs"><!-- 滑塊 -->
             <!--選取的滑塊-->
-            <button class="slide selected" id="tab1" onclick="switchSrc(this, 'Se500-NPNP.glb')">SILVER</button>
-            
-            <button class="slide" id="tab2" onclick="switchSrc(this, 'Se500-EPT.glb')">EPT</button>
-            
+            <button class="slide selected" id="tab1" Text="SILVER&"&vbCrLf& onclick="switchSrc(this, 'Se500-Silver&Black.glb')">SILVER BLACK</button>
+
+            <button class="slide" id="tab2" onclick="switchSrc(this, 'Se500-Gray.glb')">Gray</button>
+
+            <button class="slide" id="tab3" onclick="switchSrc(this, 'Se500-EPT.glb')">EPT</button>
+
         </div>
     </div>
 
