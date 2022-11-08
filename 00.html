@@ -1,0 +1,152 @@
+<!DOCTYPE = html>
+<html>
+<head>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+
+<style>
+#KMCLOGO {
+    width: 99%;
+    position: absolute;
+    float: right;
+}
+
+#KMCLOGO img {
+    width: 200px;
+    margin: 30px 50px;
+    float: right;
+}
+
+model-viewer {
+    width: 90%;
+    height: 90%;
+}
+
+#ar-button:active {
+    background-color: #E8EAED/*黑色*/;
+    cursor: pointer;
+}
+
+#ar-button:hover {
+    background-color: #7bc4ff/*黑色*/;
+}
+
+#ar-button:focus-visible {
+    outline: 1px solid #4285f4/*藍色*/;
+}
+
+@keyframes circle {
+    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+@keyframes elongate {
+    from { transform: translateX(100px); }
+    to   { transform: translateX(-100px); }
+}
+
+model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+}
+
+model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+}
+
+.slider {
+    /* width: 100%;
+    text-align: center;
+    overflow: hidden; */
+    position: absolute;
+    margin: 30px 20px;
+    bottom: 10px;
+}
+
+.slides {
+    display: flex;
+    /* overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; */
+}
+
+.slide {
+    scroll-snap-align: center; /*start*/
+    flex-shrink: 0.2;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    opacity:1;
+    margin-right: 10px;
+    display: flex;
+    border: 2px solid #b3b3b3; /*灰色*/
+    font-size: 35px;
+    font-family: Arial;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.slides #tab1{
+    font-size: 20px;
+}
+
+/*按鈕觸發呈現藍色*/
+.slide.selected {
+    border: 2px solid #4285f4;/*藍色*/
+    cursor: pointer;
+}
+
+.slide:hover {
+    outline: 1px solid #7bc4ff;/*淡藍色*/
+}
+
+.slide:focus-visible {
+    outline: 1px solid #4285f4;/*藍色*/
+}
+
+</style>
+</head>
+
+<body>
+
+    <div id="KMCLOGO"><img src="KMC Logo.png"></div>
+
+    <model-viewer camera-controls id="exposure-demo" environment-image="neutral" src="Se500-EPT.glb" shadow-intensity="0">
+    </model-viewer>
+
+    <!--按鈕目標和圖示-->
+    <div class="slider"><!-- 滑桿 -->
+        <div class="slides" id="tabs"><!-- 滑塊 -->
+            <!--選取的滑塊-->
+
+            <button class="slide selected" id="tab1" onclick="switchSrc(this, '00.gltf')">SILVER<br> GRAY</button>
+
+            <button class="slide" id="tab3" onclick="switchSrc(this, 'Se500-EPT.glb')">EPT</button>
+
+        </div>
+    </div>
+
+    <script type="module">
+        const modelViewer = document.querySelector("model-viewer");
+      
+        window.switchSrc = (element, name) => {
+          const base = " " + name;
+          modelViewer.src = base + ' ';
+          modelViewer.poster = base + ' ';
+          const slides = document.querySelectorAll(".slide");
+          slides.forEach((element) => {element.classList.remove("selected");});
+          element.classList.add("selected");
+        };
+        
+        document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+          ev.preventDefault();
+        });
+      </script>
+
+</body>
+</html>
